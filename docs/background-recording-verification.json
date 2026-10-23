@@ -1,0 +1,23 @@
+{
+  "startMs": 1792422239000,
+  "endMs": 1792422424000,
+  "durationSeconds": 185.0,
+  "samples": 35,
+  "firstMs": 1792422243715,
+  "lastMs": 1792422422364,
+  "minIntervalMs": 5172,
+  "maxIntervalMs": 5447,
+  "averageIntervalMs": 5254.4,
+  "gapMarkers": 0,
+  "idleStart": [
+    "mState=IDLE mLightState=OVERRIDE"
+  ],
+  "idleEnd": [
+    "mState=INACTIVE mLightState=INACTIVE"
+  ],
+  "powerEnd": [
+    "mWakefulness=Asleep",
+    "PARTIAL_WAKE_LOCK              'OyaVolt:BatteryMonitoring' ACQ=-39s612ms (uid=10027 pid=27847)"
+  ],
+  "method": "USB connected; simulated unplug and forced deep Doze; no device queries during 185-second wait. Not an overnight drain measurement."
+}

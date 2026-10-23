@@ -1,0 +1,25 @@
+{
+  "startMs": 1792422478000,
+  "endMs": 1792422568000,
+  "durationSeconds": 90.0,
+  "samples": 17,
+  "maxIntervalMs": 5359,
+  "gapMarkers": 0,
+  "initial": [
+    "mForceIdle=true",
+    "mState=IDLE mLightState=OVERRIDE"
+  ],
+  "final": [
+    "mForceIdle=true",
+    "mState=INACTIVE mLightState=INACTIVE"
+  ],
+  "method": "USB connected, simulated unplug, forced deep Doze, no device queries during 90-second wait",
+  "verifiedDeepIdle": {
+    "entryMs": 1792422478475,
+    "alarmExitMs": 1792422549536,
+    "durationSeconds": 71.061,
+    "samples": 14,
+    "maxIntervalMs": 5359,
+    "evidence": "device_idle event buffer: [5,s:shell] entry to [0,alarm] exit"
+  }
+}

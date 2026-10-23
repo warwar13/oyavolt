@@ -1,0 +1,523 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 4,
+    "identityHash": "5ce9e9965d7634bc0fb8ac488a5b8708",
+    "entities": [
+      {
+        "tableName": "connection_sessions",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `startedAtEpochMs` INTEGER NOT NULL, `endedAtEpochMs` INTEGER, `endReason` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startedAtEpochMs",
+            "columnName": "startedAtEpochMs",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "endedAtEpochMs",
+            "columnName": "endedAtEpochMs",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "endReason",
+            "columnName": "endReason",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "telemetry_samples",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `timestampEpochMs` INTEGER NOT NULL, `connectionSessionId` INTEGER NOT NULL, `voltageV` REAL NOT NULL, `currentA` REAL NOT NULL, `powerW` REAL NOT NULL, `socPct` INTEGER NOT NULL, `sohPct` INTEGER NOT NULL, `remainingAh` REAL NOT NULL, `fullAh` REAL NOT NULL, `cycleCount` INTEGER NOT NULL, `cellVoltagesV` TEXT NOT NULL, `cellMinV` REAL, `cellMaxV` REAL, `cellDeltaV` REAL, `probeTemperaturesC` TEXT NOT NULL, `ambientTemperatureC` INTEGER NOT NULL, `mosTemperatureC` INTEGER NOT NULL, `protectionBitfield` INTEGER, `balanceMask` INTEGER, `disconnectedCellMask` INTEGER, `rssi` INTEGER, `qualityFlags` INTEGER NOT NULL, `gapFromPreviousMs` INTEGER, FOREIGN KEY(`connectionSessionId`) REFERENCES `connection_sessions`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timestampEpochMs",
+            "columnName": "timestampEpochMs",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "connectionSessionId",
+            "columnName": "connectionSessionId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "voltageV",
+            "columnName": "voltageV",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "currentA",
+            "columnName": "currentA",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "powerW",
+            "columnName": "powerW",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "socPct",
+            "columnName": "socPct",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sohPct",
+            "columnName": "sohPct",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "remainingAh",
+            "columnName": "remainingAh",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fullAh",
+            "columnName": "fullAh",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cycleCount",
+            "columnName": "cycleCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cellVoltagesV",
+            "columnName": "cellVoltagesV",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cellMinV",
+            "columnName": "cellMinV",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "cellMaxV",
+            "columnName": "cellMaxV",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "cellDeltaV",
+            "columnName": "cellDeltaV",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "probeTemperaturesC",
+            "columnName": "probeTemperaturesC",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ambientTemperatureC",
+            "columnName": "ambientTemperatureC",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mosTemperatureC",
+            "columnName": "mosTemperatureC",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "protectionBitfield",
+            "columnName": "protectionBitfield",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "balanceMask",
+            "columnName": "balanceMask",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "disconnectedCellMask",
+            "columnName": "disconnectedCellMask",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "rssi",
+            "columnName": "rssi",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "qualityFlags",
+            "columnName": "qualityFlags",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gapFromPreviousMs",
+            "columnName": "gapFromPreviousMs",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_telemetry_samples_connectionSessionId",
+            "unique": false,
+            "columnNames": [
+              "connectionSessionId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_telemetry_samples_connectionSessionId` ON `${TABLE_NAME}` (`connectionSessionId`)"
+          },
+          {
+            "name": "index_telemetry_samples_timestampEpochMs",
+            "unique": false,
+            "columnNames": [
+              "timestampEpochMs"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_telemetry_samples_timestampEpochMs` ON `${TABLE_NAME}` (`timestampEpochMs`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "connection_sessions",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "connectionSessionId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "power_sessions",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mode` TEXT NOT NULL, `startEpochMs` INTEGER NOT NULL, `endEpochMs` INTEGER NOT NULL, `startSocPct` INTEGER, `endSocPct` INTEGER, `chargedAh` REAL NOT NULL, `dischargedAh` REAL NOT NULL, `chargedWh` REAL NOT NULL, `dischargedWh` REAL NOT NULL, `averagePowerW` REAL NOT NULL, `peakAbsolutePowerW` REAL NOT NULL, `sampleCount` INTEGER NOT NULL, `coveragePct` REAL NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mode",
+            "columnName": "mode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startEpochMs",
+            "columnName": "startEpochMs",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "endEpochMs",
+            "columnName": "endEpochMs",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startSocPct",
+            "columnName": "startSocPct",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "endSocPct",
+            "columnName": "endSocPct",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "chargedAh",
+            "columnName": "chargedAh",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dischargedAh",
+            "columnName": "dischargedAh",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "chargedWh",
+            "columnName": "chargedWh",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dischargedWh",
+            "columnName": "dischargedWh",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "averagePowerW",
+            "columnName": "averagePowerW",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "peakAbsolutePowerW",
+            "columnName": "peakAbsolutePowerW",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sampleCount",
+            "columnName": "sampleCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "coveragePct",
+            "columnName": "coveragePct",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_power_sessions_startEpochMs",
+            "unique": false,
+            "columnNames": [
+              "startEpochMs"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_power_sessions_startEpochMs` ON `${TABLE_NAME}` (`startEpochMs`)"
+          }
+        ]
+      },
+      {
+        "tableName": "daily_summaries",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`dayStartEpochMs` INTEGER NOT NULL, `chargedAh` REAL NOT NULL, `dischargedAh` REAL NOT NULL, `chargedWh` REAL NOT NULL, `dischargedWh` REAL NOT NULL, `observedMs` INTEGER NOT NULL, `missingMs` INTEGER NOT NULL, `coveragePct` REAL NOT NULL, `sampleCount` INTEGER NOT NULL, PRIMARY KEY(`dayStartEpochMs`))",
+        "fields": [
+          {
+            "fieldPath": "dayStartEpochMs",
+            "columnName": "dayStartEpochMs",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "chargedAh",
+            "columnName": "chargedAh",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dischargedAh",
+            "columnName": "dischargedAh",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "chargedWh",
+            "columnName": "chargedWh",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dischargedWh",
+            "columnName": "dischargedWh",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "observedMs",
+            "columnName": "observedMs",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "missingMs",
+            "columnName": "missingMs",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "coveragePct",
+            "columnName": "coveragePct",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sampleCount",
+            "columnName": "sampleCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "dayStartEpochMs"
+          ]
+        }
+      },
+      {
+        "tableName": "capacity_tests",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `state` TEXT NOT NULL, `startedAtMs` INTEGER NOT NULL, `pausedAtMs` INTEGER, `endedAtMs` INTEGER, `segment` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startedAtMs",
+            "columnName": "startedAtMs",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pausedAtMs",
+            "columnName": "pausedAtMs",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "endedAtMs",
+            "columnName": "endedAtMs",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "segment",
+            "columnName": "segment",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "capacity_test_samples",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `testId` INTEGER NOT NULL, `timestampMs` INTEGER NOT NULL, `voltageV` REAL NOT NULL, `currentA` REAL NOT NULL, `socPct` INTEGER NOT NULL, `segment` INTEGER NOT NULL, FOREIGN KEY(`testId`) REFERENCES `capacity_tests`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "testId",
+            "columnName": "testId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timestampMs",
+            "columnName": "timestampMs",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "voltageV",
+            "columnName": "voltageV",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "currentA",
+            "columnName": "currentA",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "socPct",
+            "columnName": "socPct",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "segment",
+            "columnName": "segment",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_capacity_test_samples_testId",
+            "unique": false,
+            "columnNames": [
+              "testId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_capacity_test_samples_testId` ON `${TABLE_NAME}` (`testId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "capacity_tests",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "testId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5ce9e9965d7634bc0fb8ac488a5b8708')"
+    ]
+  }
+}

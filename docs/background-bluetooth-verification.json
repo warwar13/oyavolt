@@ -1,0 +1,8 @@
+{
+  "disableCommandExit": 137,
+  "bluetoothOff": true,
+  "lockReleasedWhileBluetoothOff": true,
+  "bluetoothRestored": true,
+  "lockReacquired": true,
+  "foregroundServiceActive": true
+}
